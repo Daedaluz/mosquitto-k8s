@@ -1,0 +1,32 @@
+services:
+  mosquitto:
+    build:
+      context: .
+      args:
+        MOSQUITTO_TAG: v2.1.2
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - mosquitto-data:/var/lib/mosquitto
+      - mosquitto-config:/etc/mosquitto
+    depends_on:
+      passwd-sync:
+        condition: service_started
+
+  passwd-sync:
+    build:
+      context: passwd-sync
+    pid: "service:mosquitto"
+    environment:
+      INPUT_FILE: /etc/mosquitto/users.txt
+      OUTPUT_FILE: /etc/mosquitto/passwd
+      MOSQUITTO_PID_FILE: /etc/mosquitto/mosquitto.pid
+      POLL_INTERVAL: 5s
+    volumes:
+      - mosquitto-config:/etc/mosquitto
+      - ./users.txt:/etc/mosquitto/users.txt:ro
+
+volumes:
+  mosquitto-data:
+  mosquitto-config:

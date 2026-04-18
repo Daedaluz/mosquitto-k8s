@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mosquitto
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mosquitto
+  template:
+    metadata:
+      labels:
+        app: mosquitto
+    spec:
+      containers:
+        - name: mosquitto
+          image: ghcr.io/daedaluz/mosquitto:2.1.2
+          ports:
+            - name: mqtt
+              containerPort: 1883
+            - name: websockets
+              containerPort: 9001
+          env:
+            - name: MOSQUITTO_UNSAFE_ALLOW_SYMLINKS
+              value: "1"
+          volumeMounts:
+            - name: mosquitto-config
+              mountPath: /etc/mosquitto/mosquitto.conf
+              subPath: mosquitto.conf
+              readOnly: true
+            - name: mosquitto-data
+              mountPath: /var/lib/mosquitto
+          readinessProbe:
+            tcpSocket:
+              port: mqtt
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: mqtt
+            initialDelaySeconds: 15
+            periodSeconds: 20
+
+      volumes:
+        - name: mosquitto-config
+          configMap:
+            name: mosquitto-config
+        - name: mosquitto-data
+          persistentVolumeClaim:
+            claimName: mosquitto-data
