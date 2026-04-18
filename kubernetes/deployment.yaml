@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: mosquitto
-          image: ghcr.io/daedaluz/mosquitto:2.1.2
+          image: ghcr.io/daedaluz/mosquitto-k8s:2.1.2
           ports:
             - name: mqtt
               containerPort: 1883

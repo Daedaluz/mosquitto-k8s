@@ -2,7 +2,7 @@
 
 Multi-arch (`linux/amd64`, `linux/arm64`) Docker image for the [Eclipse Mosquitto](https://mosquitto.org/) MQTT broker, built from source on Debian Trixie Slim. Primarily intended for Kubernetes deployments.
 
-Images are published to `ghcr.io/daedaluz/mosquitto` and tagged by Mosquitto version.
+Images are published to `ghcr.io/daedaluz/mosquitto-k8s` and tagged by Mosquitto version.
 
 ## Features
 
@@ -15,11 +15,11 @@ Images are published to `ghcr.io/daedaluz/mosquitto` and tagged by Mosquitto ver
 ## Usage
 
 ```sh
-docker pull ghcr.io/daedaluz/mosquitto:2.1.2
+docker pull ghcr.io/daedaluz/mosquitto-k8s:2.1.2
 ```
 
 ```sh
-docker run -p 1883:1883 -p 9001:9001 ghcr.io/daedaluz/mosquitto:2.1.2
+docker run -p 1883:1883 -p 9001:9001 ghcr.io/daedaluz/mosquitto-k8s:2.1.2
 ```
 
 ## Build arguments

@@ -1,4 +1,4 @@
-REGISTRY       := ghcr.io/daedaluz/mosquitto
+REGISTRY       := ghcr.io/daedaluz/mosquitto-k8s
 MOSQUITTO_TAG  := v2.1.2
 IMAGE_TAG      := $(patsubst v%,%,$(MOSQUITTO_TAG))
 PLATFORMS      := linux/amd64,linux/arm64
