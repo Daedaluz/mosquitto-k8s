@@ -4,6 +4,8 @@ metadata:
   name: mosquitto
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: mosquitto
@@ -15,6 +17,7 @@ spec:
       containers:
         - name: mosquitto
           image: ghcr.io/daedaluz/mosquitto-k8s:v2.1.2
+          imagePullPolicy: Always
           ports:
             - name: mqtt
               containerPort: 1883

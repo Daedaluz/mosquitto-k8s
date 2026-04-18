@@ -42,6 +42,7 @@ FROM debian:${DEBIAN_VERSION}
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libssl3 \
     libcjson1 \
+    ca-certificates \
     libreadline8t64 \
     libmicrohttpd12t64 \
     libsqlite3-0 \
