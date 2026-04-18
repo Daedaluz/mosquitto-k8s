@@ -4,15 +4,19 @@ metadata:
   name: mosquitto-config
 data:
   mosquitto.conf: |
+    user root
     pid_file /var/lib/mosquitto/mosquitto.pid
-
-    listener 1883
-    allow_anonymous true
-
-    listener 9001
-    protocol websockets
-    allow_anonymous true
 
     persistence true
     persistence_location /var/lib/mosquitto/
     log_dest stdout
+
+    listener 1883
+    allow_anonymous false
+    password_file /etc/mosquitto/passwd
+
+    listener 9001
+    protocol websockets
+    allow_anonymous false
+    password_file /etc/mosquitto/passwd
+

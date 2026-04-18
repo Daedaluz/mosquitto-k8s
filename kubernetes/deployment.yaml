@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: mosquitto
-          image: ghcr.io/daedaluz/mosquitto-k8s:2.1.2
+          image: ghcr.io/daedaluz/mosquitto-k8s:v2.1.2
           ports:
             - name: mqtt
               containerPort: 1883
@@ -30,6 +30,10 @@ spec:
               readOnly: true
             - name: mosquitto-data
               mountPath: /var/lib/mosquitto
+            - name: mosquitto-passwd
+              mountPath: /etc/mosquitto/passwd
+              subPath: passwd
+              readOnly: true
           readinessProbe:
             tcpSocket:
               port: mqtt
@@ -48,3 +52,6 @@ spec:
         - name: mosquitto-data
           persistentVolumeClaim:
             claimName: mosquitto-data
+        - name: mosquitto-passwd
+          secret:
+            secretName: mosquitto-passwd
