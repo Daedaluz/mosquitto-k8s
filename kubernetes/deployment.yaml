@@ -38,12 +38,12 @@ spec:
             tcpSocket:
               port: mqtt
             initialDelaySeconds: 5
-            periodSeconds: 10
+            periodSeconds: 5
           livenessProbe:
             tcpSocket:
               port: mqtt
             initialDelaySeconds: 15
-            periodSeconds: 20
+            periodSeconds: 120
 
       volumes:
         - name: mosquitto-config
