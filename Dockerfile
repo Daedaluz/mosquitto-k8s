@@ -11,7 +11,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     cmake \
     libssl-dev \
     libcjson-dev \
-    libadns1-dev \
     libreadline-dev \
     libmicrohttpd-dev \
     libsqlite3-dev \
@@ -30,7 +29,6 @@ RUN cmake \
     -DWITH_STATIC_LIBRARIES=OFF \
     -DWITH_TLS=ON \
     -DWITH_WEBSOCKETS=ON \
-    -DWITH_ADNS=ON \
     -DWITH_SRV=ON \
     -DWITH_MICROHTTPD=ON \
     -DWITH_DOCS=OFF \
@@ -44,7 +42,6 @@ FROM debian:${DEBIAN_VERSION}
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libssl3 \
     libcjson1 \
-    libadns1 \
     libreadline8t64 \
     libmicrohttpd12t64 \
     libsqlite3-0 \
